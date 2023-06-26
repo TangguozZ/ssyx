@@ -2,9 +2,9 @@ package com.atguigu.ssyx.acl.controller;
 
 
 import com.atguigu.ssyx.common.result.Result;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,11 +14,14 @@ import java.util.Map;
  * @Date：2023/6/26 23:35
  * @Filename：IndexController
  */
+@Api(tags = "登录接口")
 @RestController
 @RequestMapping("/admin/acl/index")
+@CrossOrigin
 public class IndexController {
 
 
+    @ApiOperation("登录")
     @PostMapping("/login")
     public Result login() {
         Map<String, Object> resMap = new HashMap<>();
@@ -26,7 +29,8 @@ public class IndexController {
         return Result.ok(resMap);
     }
 
-    @PostMapping("/info")
+    @ApiOperation("获取登录用户信息")
+    @GetMapping("/info")
     public Result info() {
         Map<String, Object> infoMap = new HashMap<>();
         infoMap.put("name", "admin");
@@ -34,6 +38,7 @@ public class IndexController {
         return Result.ok(infoMap);
     }
 
+    @ApiOperation("登出")
     @PostMapping("/logout")
     public Result logout() {
         return Result.ok(null);
