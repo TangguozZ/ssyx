@@ -1,6 +1,5 @@
 package com.atguigu.ssyx.acl.controller;
 
-
 import com.atguigu.ssyx.common.result.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -8,40 +7,43 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Handler;
 
-/**
- * @Author：tangzhiqiang
- * @Date：2023/6/26 23:35
- * @Filename：IndexController
- */
 @Api(tags = "登录接口")
 @RestController
 @RequestMapping("/admin/acl/index")
-@CrossOrigin
+//@CrossOrigin //跨域
 public class IndexController {
 
-
+    //   http://localhost:8201/admin/acl/index/login
+    //1 login登录
     @ApiOperation("登录")
-    @PostMapping("/login")
+    @PostMapping("login")
     public Result login() {
-        Map<String, Object> resMap = new HashMap<>();
-        resMap.put("token", "token-admin");
-        return Result.ok(resMap);
+        //返回token值
+        Map<String,String> map = new HashMap<>();
+        map.put("token","token-admin");
+        return Result.ok(map);
     }
 
-    @ApiOperation("获取登录用户信息")
-    @GetMapping("/info")
+//    url: '/admin/acl/index/info',
+//    method: 'get',
+    //2 getInfo 获取信息
+    @ApiOperation("获取信息")
+    @GetMapping("info")
     public Result info() {
-        Map<String, Object> infoMap = new HashMap<>();
-        infoMap.put("name", "admin");
-        infoMap.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        return Result.ok(infoMap);
+        Map<String,String> map = new HashMap<>();
+        map.put("name","admin");
+        map.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        return Result.ok(map);
     }
 
-    @ApiOperation("登出")
-    @PostMapping("/logout")
+//    url: '/admin/acl/index/logout',
+//    method: 'post'
+    //3 logout 退出
+    @ApiOperation("退出")
+    @PostMapping("logout")
     public Result logout() {
         return Result.ok(null);
     }
-
 }
